@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="6" class="logo-container">
         <img src="../assets/coin.png" alt="" class="logo">
-        <span class="title">Allenem资金管理系统</span>
+        <span class="title">家庭资金管理系统</span>
       </el-col>
 
       <el-col :span="6" class="user">

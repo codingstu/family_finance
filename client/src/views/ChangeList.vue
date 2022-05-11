@@ -1,7 +1,7 @@
 <template>
   <div class="changelist">
     <div class="container">
-      <h1 class="title">Allenem资金管理系统</h1>
+      <h1 class="title">家庭资金管理系统</h1>
       <p class="lead"> 未完待续 . . . </p>
     </div>
   </div>
