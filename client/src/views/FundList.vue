@@ -121,19 +121,10 @@
 
         <el-table-column
           prop="remark"
-          label="备注"
-          align="center"
-          width="130"
-        ></el-table-column>
-
-        <el-table-column
-          prop="warning"
           label="资金预警"
           align="center"
           width="130"
-        >
-          <span style="color: #4db3ff;">{{ warning }}</span>
-        </el-table-column>
+        ></el-table-column>
 
         <!-- 管理员操作部分 -->
         <el-table-column
@@ -266,7 +257,10 @@ export default {
         .then((res) => {
           console.log(res)
           res.data.forEach((i) => {
-            i.remark= i.income - i.expend
+            i.remark = i.income - i.expend
+            if (i.remark < 0) {
+              this.$message.warning('资金不足，请充值')
+            }
           })
           this.allTableData = res.data
           this.filterTableData = res.data
