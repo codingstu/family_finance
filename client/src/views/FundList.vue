@@ -309,6 +309,7 @@ export default {
           this.$axios
             .delete(`/api/profiles/delete/${row._id}`)
             .then((res) => {
+              console.log(res)
               this.$message({
                 message: `"${row.describe}"删除成功!`,
                 type: 'success',
@@ -316,6 +317,7 @@ export default {
               this.getProfile()
             })
             .catch((err) => {
+              console.log(err);
               this.$message({
                 message: `"${row.describe}"删除失败!`,
                 type: 'warning',
