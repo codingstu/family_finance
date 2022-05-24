@@ -45,7 +45,7 @@
             path: 'fund',
             children: [
               {path:'fundlist',icon: 'fa-credit-card-alt',name:'资金流水'},
-              {path:'changelist',icon: 'fa-credit-card',name:'修改记录'}
+              // {path:'changelist',icon: 'fa-credit-card',name:'修改记录'}
             ]
           },
           {

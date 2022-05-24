@@ -71,6 +71,19 @@
           align="center"
           :span="8"
         ></el-table-column>
+
+        <el-table-column prop="operation" label="删除" align="center" :span="8">
+          <template slot-scope="scope">
+            <el-button
+              size="small"
+              type="danger"
+              icon="el-icon-delete"
+              @click="handleDelete(scope.$index, scope.row)"
+            >
+              删除
+            </el-button>
+          </template>
+        </el-table-column>
       </el-table>
 
       <!-- 分页 -->
@@ -106,6 +119,7 @@
 <script>
 export default {
   name: 'userlist',
+  inject: ['reload'],
   data() {
     return {
       search_user: {
@@ -145,7 +159,7 @@ export default {
       this.$axios
         .get('/api/users')
         .then((res) => {
-          // console.log(res);
+          console.log(res)
           this.allUserData = res.data
           this.filterUserData = res.data
           // 设置分页
@@ -162,6 +176,7 @@ export default {
       this.userData = this.allUserData.filter((item, index) => {
         return index < this.paginations.page_size
       })
+      console.log(this.userData)
     },
     handleSizeChange(page_size) {
       // 切换size
@@ -209,6 +224,17 @@ export default {
       })
       // 设置分页
       this.setPaginations()
+    },
+    handleDelete(index, row) {
+      this.$axios.delete(`/api/users/del/${row._id}`).then((res) => {
+        console.log(res)
+        this.$message({
+          message: `"${row.name}"删除成功!`,
+          type: 'success',
+        })
+        // this.reload()
+      })
+      this.reload()
     },
   },
 }

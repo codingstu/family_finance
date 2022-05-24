@@ -2,29 +2,47 @@
   <div class="index">
     <HeadNav></HeadNav>
     <LeftMenu></LeftMenu>
-    <div class="rightContainer"><router-view/></div>
+    <div class="rightContainer"><router-view v-if="isRouterAlive" /></div>
   </div>
 </template>
 
 <script>
-  import HeadNav from '../components/HeadNav';
-  import LeftMenu from '../components/LeftMenu';
-  export default {
-    name: "index",
-    components: {
-      HeadNav,
-      LeftMenu
+import HeadNav from '../components/HeadNav'
+import LeftMenu from '../components/LeftMenu'
+export default {
+  name: 'index',
+  provide() {
+    return {
+      reload: this.reload,
     }
-  }
+  },
+  data() {
+    return {
+      isRouterAlive: true,
+    }
+  },
+  components: {
+    HeadNav,
+    LeftMenu,
+  },
+  methods: {
+    reload() {
+      this.isRouterAlive = false
+      this.$nextTick(function () {
+        this.isRouterAlive = true
+      })
+    },
+  },
+}
 </script>
 
 <style scoped>
-.index{
+.index {
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
-.rightContainer{
+.rightContainer {
   position: relative;
   top: 0;
   left: 180px;

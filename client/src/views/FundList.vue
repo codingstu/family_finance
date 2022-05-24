@@ -78,7 +78,9 @@
         >
           <template slot-scope="scope">
             <i class="el-icon-time"></i>
-            <span style="margin-left: 10px;">{{ scope.row.date }}</span>
+            <span style="margin-left: 10px;">
+              {{ scope.row.date | dateFormat }}
+            </span>
           </template>
         </el-table-column>
 
@@ -207,6 +209,7 @@
 import Dialog from '../components/Dialog'
 export default {
   name: 'fundlist',
+  inject: ['reload'],
   data() {
     return {
       search_data: {
@@ -314,15 +317,17 @@ export default {
                 message: `"${row.describe}"删除成功!`,
                 type: 'success',
               })
-              this.getProfile()
+
+              this.reload()
             })
             .catch((err) => {
-              console.log(err);
-              this.$message({
-                message: `"${row.describe}"删除失败!`,
-                type: 'warning',
-              })
+              console.log(err)
+              // this.$message({
+              //   message: `"${row.describe}"删除失败!`,
+              //   type: 'warning',
+              // })
             })
+          this.reload()
         })
         .catch(() => {
           this.$message({
